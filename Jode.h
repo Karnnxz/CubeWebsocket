@@ -3,6 +3,7 @@
 #include <WebSocketsServer.h>
 #include "index.h"
 
+#define LED 27
 const char* ssid     = "@JumboPlusIoT";
 const char* password = "hr92o378";
 
@@ -29,9 +30,9 @@ void onWebSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t leng
       Serial.printf("Received: %s\n", message.c_str());
 
       if (message == "ON") {
-        digitalWrite(2, HIGH); // เปิดไฟ
+        digitalWrite(LED, HIGH); // เปิดไฟ
       } else if (message == "OFF") {
-        digitalWrite(2, LOW);  // ปิดไฟ
+        digitalWrite(LED, LOW);  // ปิดไฟ
       }
       break;
     
@@ -65,7 +66,7 @@ void setup() {
   webSocket.onEvent(onWebSocketEvent);
   Serial.println("WebSocket server started on port 81");
 
-  pinMode(27, OUTPUT);
+  pinMode(LED, OUTPUT);
 }
 
 void loop() {
